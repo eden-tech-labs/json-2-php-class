@@ -1,5 +1,6 @@
 {
   "name": "eden-tech-labs/json-2-php-class",
+  "version": "dev",
   "type": "library",
   "description": "Creates object of native classes from JSON string or object",
   "keywords": ["json","php","class","map"],
@@ -12,5 +13,8 @@
       "homepage": "https://github.com/eden-tech-labs/json-2-php-class",
       "role": "Developer"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {"EdenTechLabs\\" : "src/"}
+  }
 }

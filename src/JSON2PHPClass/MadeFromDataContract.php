@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Tools\ETL;
+namespace EdenTechLabs\JSON2PHPClass;
 
 
 interface MadeFromDataContract
