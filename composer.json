@@ -5,7 +5,7 @@
   "description": "Creates object of native classes from JSON string or object",
   "keywords": ["json","php","class","map"],
   "homepage": "https://github.com/eden-tech-labs/json-2-php-class",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Lachezar Todorov",
