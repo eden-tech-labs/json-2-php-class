@@ -180,3 +180,24 @@ As a property `mapping` you can define this types:
   - If `implements MadeFromDataContract` an object will be created using `make` function
   - Any other class will be created by `__construct` passing the `value` as first and only parameter.
 - `Closure` To be defined.
+
+## PHPDoc
+
+Example
+```
+echo SampleClass::generatePHPDoc();
+```
+
+Output
+```
+/**
+ * Class SampleClass
+ * @property string applicationId
+ * @property \SampleKind kind
+ * @property \DateTime purchaseTime
+ * @property object developerPayload
+ * @property int quantity
+ * @property bool acknowledged
+ * @property \SamplePayload samplePayload
+ */
+```
