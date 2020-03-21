@@ -1,6 +1,6 @@
 {
   "name": "eden-tech-labs/json-2-php-class",
-  "version": "dev",
+  "version": "v1.0.0",
   "type": "library",
   "description": "Creates object of native classes from JSON string or object",
   "keywords": ["json","php","class","map"],
