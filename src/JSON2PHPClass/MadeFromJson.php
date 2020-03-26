@@ -27,6 +27,10 @@ trait MadeFromJson
         return [];
     }
 
+    protected static function _aliases() : array {
+        return [];
+    }
+
     /**
      * @param array|string|object $data
      * @return static
@@ -43,49 +47,55 @@ trait MadeFromJson
         if (!is_array($data) || empty($data))
             throw new Exception('Invalid object data');
 
+        $aliases = self::_aliases();
+
         $object = new self();
         foreach ($data as $key => $value) {
 
-            $parsingMethod = 'parse' . ucfirst($key) . 'Attribute';
+            $propertyKey = (isset($aliases[$key]))
+                ? $aliases[$key]
+                : $key;
+
+            $parsingMethod = 'parse' . ucfirst($propertyKey) . 'Attribute';
             if (method_exists(self::class, $parsingMethod))
                 $value = self::$parsingMethod($value);
 
-            $type = self::typeByKey($key);
+            $type = self::typeByKey($propertyKey);
             switch ($type) {
                 case 'int':
-                    $object->$key = (int) $value;
+                    $object->$propertyKey = (int) $value;
                     break;
                 case 'string':
-                    $object->$key = (string) $value;
+                    $object->$propertyKey = (string) $value;
                     break;
                 case 'float':
-                    $object->$key = (float) $value;
+                    $object->$propertyKey = (float) $value;
                     break;
                 case 'bool':
-                    $object->$key = (bool) $value;
+                    $object->$propertyKey = (bool) $value;
                     break;
                 case 'milliseconds':
-                    $object->$key = DateTime::createFromFormat('U', (int)($value/1000));
+                    $object->$propertyKey = DateTime::createFromFormat('U', (int)($value/1000));
                     break;
                 case 'seconds':
-                    $object->$key = DateTime::createFromFormat('U', $value);
+                    $object->$propertyKey = DateTime::createFromFormat('U', $value);
                     break;
                 case 'json':
-                    $object->$key = json_decode($value);
+                    $object->$propertyKey = json_decode($value);
                     break;
                 case 'unknown':
-                    $object->$key = $value;
+                    $object->$propertyKey = $value;
                     break;
                 default:
                     if (class_exists($type)) {
                         if (is_callable($value))
-                            $object->$key = $value();
+                            $object->$propertyKey = $value();
                         elseif (is_subclass_of($type, MadeFromDataContract::class))
-                            $object->$key = $type::make($value);
+                            $object->$propertyKey = $type::make($value);
                         else
-                            $object->$key = new $type($value);
+                            $object->$propertyKey = new $type($value);
                     } else {
-                        $object->$key = $value;
+                        $object->$propertyKey = $value;
                     }
 
                     break;

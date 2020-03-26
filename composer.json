@@ -16,5 +16,9 @@
   ],
   "autoload": {
     "psr-4": {"EdenTechLabs\\" : "src/"}
+  },
+  "require": {
+    "php":"^7.1",
+    "ext-json": "*"
   }
 }

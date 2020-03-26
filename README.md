@@ -3,7 +3,7 @@ Creates object of native classes from JSON string or object
 **[json-2-php-class](https://github.com/eden-tech-labs/json-2-php-class)** is a library for converting json objects to native classes.
 
 ## Requirements
-- PHP 7.2 and above. (Should be checked!)
+- PHP 7.1 and above.
 
 ## Installation
 
@@ -30,7 +30,7 @@ However, using Composer is recommended as you can easily keep the library up-to-
 ## Usage
 After you installed `json-2-php-class` library, in your classes you should implement the `interface` and `use` the trait and that satisfies the `interface` requirements.
 After that you should override the `_mapping()` method. You can check the implementation and documentation below.
-You can define your properties in the class or in the `PHPDoc` as in the example. After you define your properties rules you can export `PHPDoc`. Example below.(TODO: put link here)
+You can define your properties in the class or in the `PHPDoc` as in the example. After you define your properties rules you can export `PHPDoc`. Example below.
 
 ### Sample Class
 
@@ -77,6 +77,12 @@ class SampleClass implements MadeFromDataContract
 class SamplePayload implements MadeFromDataContract
 {
     use MadeFromJson;
+
+    protected static function _aliases() : array {
+        return [
+            'shittyName' => 'goodName'
+        ];
+    }
 
     protected static function _mapping() : array {
         return [
