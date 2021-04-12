@@ -17,7 +17,7 @@ trait MadeFromJson
      * @throws Exception
      */
     protected static function typeByKey(string $key) : string {
-        if (self::$allowNotSpecifiedProperties && !isset(self::_mapping()[$key]))
+        if (!self::$allowNotSpecifiedProperties && !isset(self::_mapping()[$key]))
             throw new Exception('Property "' . $key . '" is not expected in class ' . self::class);
 
         return (string) self::_mapping()[$key] ?? 'unknown';
